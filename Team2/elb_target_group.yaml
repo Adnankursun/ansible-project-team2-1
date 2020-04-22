@@ -1,0 +1,16 @@
+---
+- name: Target Group
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars_file.yaml
+  ignore_errors: yes
+  tasks:
+
+  - elb_target_group:
+      name: mytargetgroup
+      region: eu-west-2
+      protocol: http
+      port: 80
+      vpc_id: vpc-0fc840bb81dca6ea8
+      state: present

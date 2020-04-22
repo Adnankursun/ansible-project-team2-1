@@ -1,0 +1,28 @@
+---
+- name: Auto Scaling Group
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars_file.yaml
+  ignore_errors: yes
+  task:
+
+
+  - name: ec2 group
+    ec2_group:
+      name: launch-wizard-1
+      description: an example EC2 group
+      vpc_id: vpc-0fc840bb81dca6ea8
+      region: us-east-1
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 443
+          to_port: 443

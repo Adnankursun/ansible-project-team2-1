@@ -1,0 +1,20 @@
+---
+- name: Auto Scaling Group
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars_file.yaml
+  ignore_errors: yes
+  task:
+
+  - ec2_asg:
+      name: myasg
+      launch_config_name: launch_asg
+      health_check_period: 60
+      health_check_type: ELB
+      replace_all_instances: yes
+      min_size: 3
+      max_size: 48
+      desired_capacity: 3
+      region: eu-west-2
+      state: present
