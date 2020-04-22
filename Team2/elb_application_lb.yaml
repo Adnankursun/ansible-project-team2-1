@@ -9,7 +9,7 @@
   
   - elb_application_lb:
       name: myelb
-      security_groups: Project2
+      security_groups: "{{Project2}}"
       region: "{{ region }}"
       subnets:
         - "{{subnet_1_AZ}}"
