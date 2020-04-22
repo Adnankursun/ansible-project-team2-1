@@ -1,72 +1,24 @@
-#       SECURITY GROUP
-
-name: "launch-wizard-1"
-vpc_id:  "vpc-0fc840bb81dca6ea8"
-proto:  "tcp"
-from_port:  "80"
-to_port: "80"
-cidr_ip: "0.0.0.0"
-
-# proto:  "tcp"
-# from_port:  "443"
-# to_port: "443"
-# cidr_ip: "0.0.0.0"
-
-# proto:  "tcp"
-# from_port:  "22"
-# to_port: "22"
-# cidr_ip: "0.0.0.0"
-
-
-#        LAUCH CONFIGURATION
-# name:                       "launch_asg"
-image_id:                   "ami-01d5e2046079dd35c"
-security_groups:            "launch-wizard-1"
+#  Launch Configuration 
+image_id:                   "ami-0ef6f4883001fae26"
+security_groups:            "Project2"
 instance_type:              "t2.micro"
-key_name:                   "ansible"
-region:                     "eu-west-2"
-# device_name:                "/dev/xvda"
-# volume_size:                "100"
+region:                     "us-east-1"
+# device_name:                "/dev/sda1"
+# volume_size:                "8"
 # volume_type:                "gp2"  
 # iops:                       "3000"
-delete_on_termination:      "yes"
-encrypted:                  "no"
-
-#        TARGET_GROUP
-# name:                       "mytargetgroup"
+key_name:                   "key_name"
+aws_default_image_size:     "8"
+ #        TARGET_GROUP
 protocol:                   "http"
 port:                       "80"
-vpc_id:                     "vpc-0fc840bb81dca6ea8"
+vpc_id:                     "vpc-0ac4028aca2aac1a1"
 
-#        APPLICATION LOAD BALANCER
-# name:                       "myelb"
-security_groups:            "launch-wizard-1"
-subnets:                    "{{ subnet-0b4b71fdd6338c402}}, {{subnet-08a47152982b03821}}, {{subnet-00bcbb7fdfec17773}}"
-Protocol:                   "HTTP"
-Port:                       "80"
-Type:                       "forward"
-state:                      "present"
-TargetGroupName:            "mytargetgroup"
-
-#        AUTO SCALING FROUP 
-# name:                       "myasg"
-launch_config_name:         "launch_asg"
-health_check_period:        "60"
-health_check_type:          "ELB"
-replace_all_instances:      "yes" # or no
-min_size:                   "3"
-max_size:                   "48"
-desired_capacity:           "3"
-
-
-
-# Public_cidr1:             "10.10.11.0/24"
-# Public_cidr2:             "10.10.12.0/24"
-# Public_cidr3:             "10.10.13.0/24"
-# #igw.gateway_id:          "igw-02cc3ecfecf3375ca"
-# # vpc_id:                 "vpc-0ff6c647d438b4156"
-# Private_cidr1:            "10.10.1.0/24"
-# Private_cidr2:            "10.10.2.0/24"
-# Private_cidr3:            "10.10.3.0/24"
-# #nat.instance_id:         "nat-01112e2eb127216aa"
-
+subnet_1_AZ:                "subnet-081b6a6409e1e83d7"
+subnet_2_AZ:                "subnet-08381699d1beea370"
+subnet_3_AZ:                "subnet-05914d81be9a7a700"
+ 
+  # AutoScalingGroup
+min_size_instances:                   "3"
+max_size_instances:                   "48"
+desired_capacity_instances:           "3"

@@ -1,24 +1,18 @@
-#  Launch Configuration 
-image_id:                   "ami-0ef6f4883001fae26"
-security_groups:            "Project2"
-instance_type:              "t2.micro"
-region:                     "us-east-1"
-device_name:                "/dev/sda1"
-volume_size:                "8"
-volume_type:                "gp2"  
-iops:                       "3000"
-key_name:                   "key_name"
-
- #        TARGET_GROUP
-protocol:                   "http"
-port:                       "80"
-vpc_id:                     "vpc-0ac4028aca2aac1a1"
-
-subnet_1_AZ:                "subnet-081b6a6409e1e83d7"
-subnet_2_AZ:                "subnet-08381699d1beea370"
-subnet_3_AZ:                "subnet-05914d81be9a7a700"
- 
-  # AutoScalingGroup
-min_size_instances:                   "3"
-max_size_instances:                   "48"
-desired_capacity_instances:           "3"
+---
+- name: Target Group
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - vars_file.yaml
+  ignore_errors: no
+  tasks:         
+  - elb_target_group:
+      name: mytargetgroup
+      target_type: instance
+      region: "{{ region }}"
+      protocol: http
+      port: 80
+      vpc_id: "{{ vpc_id }}"
+      health_check_path: /
+      successful_response_codes: "200,250-260"
+      state: present
