@@ -2,10 +2,8 @@
 - name: all vpc playbooks
   hosts: localhost
   tasks: 
+  
 
-- name: all vpc playbooks
-  hosts: localhost
-  tasks: 
 
 - name: Create Security Group
   include: ec2_group.yaml
