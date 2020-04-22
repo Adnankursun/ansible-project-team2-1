@@ -1,21 +1,18 @@
 ---
-- name: all vpc playbooks
+- name: Auto Scaling Group
   hosts: localhost
+
+
+
   tasks: 
-  
-
-
-- name: Create Security Group
-  include: ec2_group.yaml
-  
 - name: Create launch configuration
-  include: ec2_lc.yaml
+  import_playbook: ec2_lc.yaml
 
 - name: Create target group
-  include: elb_target_group.yaml
+  import_playbook: elb_target_group.yaml
 
 - name: Create Application Load Balancer
-  include: elb_application_lb.yaml
+  import_playbook: elb_application_lb.yaml
 
 - name: Create Auto Scaling Group
-  include: ec2_asg.yaml
+  import_playbook: ec2_asg.yaml

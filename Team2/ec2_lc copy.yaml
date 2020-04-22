@@ -1,0 +1,24 @@
+---
+- name: Launch Configuration
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - vars_file.yaml
+
+  tasks:
+  - name: create launch config
+    ec2_lc:
+      name: launch_asg
+      image_id: "{{ image_id }}"
+      key_name: "{{ key_name }}"
+      security_groups: "{{ security_groups }}"
+      instance_type: "{{ instance_type }}"
+      region: "{{ region }}"
+      volumes:
+      - device_name: "{{ device_name }}"
+        volume_size: "{{ volume_size }}"
+        volume_type: "{{ volume_type }}"
+        iops: "{{ iops }}"
+        delete_on_termination: true
+        encrypted: no
+    register: lc

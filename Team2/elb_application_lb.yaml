@@ -1,24 +1,24 @@
 ---
 - name: Application Load Balancer
   hosts: localhost
-  gather_facts: no
+  gather_facts: yes
   vars_files:
     - vars_file.yaml
-  ignore_errors: yes
+  ignore_errors: no
   tasks:
-
+  
   - elb_application_lb:
       name: myelb
-      security_groups: "{{ launch-wizard-1 }}"
-      region: "{{ eu-west-2 }}"
+      security_groups: Project2
+      region: "{{ region }}"
       subnets:
-        - "{{ subnet-0b4b71fdd6338c402 }}"
-        - "{{ subnet-08a47152982b03821 }}"
-        - "{{ subnet-00bcbb7fdfec17773 }}"
+        - "{{subnet_1_AZ}}"
+        - "{{subnet_2_AZ}}"
+        - "{{subnet_3_AZ}}"
       listeners:
-        - Protocol: "{{ HTTP }}" # Required. The protocol for connections from clients to the load balancer (HTTP or HTTPS) (case-sensitive).
-          Port: "{{ 80 }}"
-          DefaultActions:
-            - Type: "{{ forward }}" # Required.
-              TargetGroupName: "{{ mytargetgroup }}"
+      - Protocol: HTTP # Required. The protocol for connections from clients to the load balancer (HTTP or HTTPS) (case-sensitive).
+        Port: 80 
+        DefaultActions:
+          - Type: forward # Required.
+            TargetGroupName: mytargetgroup
       state: present
