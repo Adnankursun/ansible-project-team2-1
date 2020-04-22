@@ -15,10 +15,10 @@
       instance_type: "{{ instance_type }}"
       region: "{{ region }}"
       volumes:
-      - device_name: "{{ device_name }}"
-        volume_size: "{{ volume_size }}"
-        volume_type: "{{ volume_type }}"
-        iops: "{{ iops }}"
+      - device_name: /dev/xvda
+        volume_size: 8
+        volume_type: gp2
+        iops: 3000
         delete_on_termination: true
         encrypted: no
     register: lc
