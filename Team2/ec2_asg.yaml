@@ -12,6 +12,7 @@
       launch_config_name: launch_asg
       health_check_period: 60
       health_check_type: ELB
+      vpc_zone_identifier:
         - "{{subnet_1_AZ}}"
         - "{{subnet_2_AZ}}"
         - "{{subnet_3_AZ}}"
