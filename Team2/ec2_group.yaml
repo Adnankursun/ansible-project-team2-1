@@ -1,5 +1,5 @@
 ---
-- name: Auto Scaling Group
+- name: Security Group
   hosts: localhost
   gather_facts: no
   vars_files:
@@ -10,19 +10,19 @@
 
   - name: ec2 group
     ec2_group:
-      name: launch-wizard-1
+      name: "{{ launch-wizard-1 }}"
       description: an example EC2 group
-      vpc_id: vpc-0fc840bb81dca6ea8
-      region: us-east-1
+      vpc_id: "{{ vpc-0fc840bb81dca6ea8 }}"
+      region: "{{ us-east-1 }}"
       rules:
-        - proto: tcp
-          from_port: 80
-          to_port: 80
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 22
-          to_port: 22
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 443
-          to_port: 443
+        - proto: "{{ tcp }}"
+          from_port: "{{ 80 }}"
+          to_port: "{{ 80 }}"
+          cidr_ip: "{{ 0.0.0.0/0 }}"
+        - proto: "{{ tcp }}"
+          from_port: "{{ 22 }}"
+          to_port: "{{ 22 }}"
+          cidr_ip: "{{ 0.0.0.0/0 }}"
+        - proto: "{{ tcp }}"
+          from_port: "{{ 443 }}"
+          to_port: "{{ 443 }}"

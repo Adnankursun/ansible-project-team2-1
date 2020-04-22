@@ -19,26 +19,27 @@ cidr_ip: "0.0.0.0"
 
 
 #        LAUCH CONFIGURATION
-name:                       "launch_asg"
+# name:                       "launch_asg"
 image_id:                   "ami-01d5e2046079dd35c"
 security_groups:            "launch-wizard-1"
 instance_type:              "t2.micro"
+key_name:                   "ansible"
 region:                     "eu-west-2"
 device_name:                "/dev/xvda"
 volume_size:                "100"
 volume_type:                "gp2"  
 iops:                       "3000"
-delete_on_termination: yes
-encrypted: no
+delete_on_termination:      "yes"
+encrypted:                  "no"
 
 #        TARGET_GROUP
-name:                       "mytargetgroup"
+# name:                       "mytargetgroup"
 protocol:                   "http"
 port:                       "80"
 vpc_id:                     "vpc-0fc840bb81dca6ea8"
 
 #        APPLICATION LOAD BALANCER
-name:                       "myelb"
+# name:                       "myelb"
 security_groups:            "launch-wizard-1"
 subnets:                    "{{ subnet-0b4b71fdd6338c402}}, {{subnet-08a47152982b03821}}, {{subnet-00bcbb7fdfec17773}}"
 Protocol:                   "HTTP"
@@ -48,7 +49,7 @@ state:                      "present"
 TargetGroupName:            "mytargetgroup"
 
 #        AUTO SCALING FROUP 
-name:                       "myasg"
+# name:                       "myasg"
 launch_config_name:         "launch_asg"
 health_check_period:        "60"
 health_check_type:          "ELB"
