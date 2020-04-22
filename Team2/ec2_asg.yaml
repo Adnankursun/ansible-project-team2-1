@@ -12,6 +12,9 @@
       launch_config_name: launch_asg
       health_check_period: 60
       health_check_type: ELB
+        - "{{subnet_1_AZ}}"
+        - "{{subnet_2_AZ}}"
+        - "{{subnet_3_AZ}}"
       replace_all_instances: yes
       min_size: "{{ min_size_instances }}"
       max_size: "{{ max_size_instances }}"
