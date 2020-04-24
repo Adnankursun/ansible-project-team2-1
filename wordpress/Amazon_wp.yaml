@@ -1,0 +1,43 @@
+---
+- name: Install wordpress on Amazon instance 
+  gather_facts: yes 
+  hosts: localhost
+  become: true
+  become_method: sudo
+  user: ec2-user
+
+  tasks:
+  
+    - name: Install necessary packages
+      package:
+        name: "{{item}}"
+        state: latest
+      with_items:
+       - httpd
+       - wget
+       - unzip
+      ignore_errors: true
+
+    - name: install extras php7.2
+      shell: "sudo amazon-linux-extras install php7.2 -y"
+
+    - name: Download wordpress Package
+      get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp/
+
+    - name: Unzip wordpress
+      unarchive: 
+        src: /tmp/wordpress-5.4.tar.gz
+        dest: /var/www/html/
+        remote_src: yes 
+
+    - name: Move files to html folder
+      shell: "mv /var/www/html/wordpress/*  /var/www/html"
+      ignore_errors: yes
+
+    - name: run apache 
+      systemd: 
+        name: httpd 
+        state: restarted 
+        enabled: yes 

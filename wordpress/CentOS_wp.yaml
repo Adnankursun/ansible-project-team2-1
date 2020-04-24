@@ -1,0 +1,45 @@
+---
+- name: Install wordpress on CentOS 7 
+  gather_facts: no 
+  hosts: localhost
+  become: true
+  become_method: sudo
+  user: centos
+
+  tasks:
+
+    - name: Install necessary packages
+      package:
+        name: "{{item}}"
+        state: latest
+      with_items:
+       - httpd
+       - wget
+       - unzip
+      ignore_errors: true
+
+    - name: Download wordpress Package
+      get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp/
+
+    - name: Unzip wordpress
+      unarchive: 
+        src: /tmp/wordpress-5.4.tar.gz
+        dest: /var/www/html/
+        remote_src: yes 
+
+    - name: Move files to html folder
+      shell: "mv /var/www/html/wordpress/*  /var/www/html"
+      ignore_errors: yes
+        
+    - name: Move index.html 
+      shell: "mv /var/www/html/index.html /tmp/"
+      ignore_errors: true
+
+    - name: run apache 
+      systemd: 
+        name: httpd 
+        state: restarted 
+        enabled: yes 
+      ignore_errors: yes 
