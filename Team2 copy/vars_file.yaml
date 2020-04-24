@@ -1,0 +1,18 @@
+vpc_id:                     "vpc-0c70a22e0e317408f"
+subnet1:                    "subnet-07665ac24da769074"
+subnet2:                    "subnet-08509988275bea288"
+subnet3:                    "subnet-0b95fd4bb00c1f3a7"
+
+region:                     "sa-east-1"
+image_id:                   "ami-05c2a0ae12590dbbc"
+key_name:                   "basiton_team2"
+security_groups:            "team2sg"
+instance_type:              "t2.micro"
+
+health_check_period:        "60"
+health_check_type:          "ELB"
+min_size:                   "3"
+max_size:                   "48"
+desired_capacity:           "3"
+state:                      "present"
+

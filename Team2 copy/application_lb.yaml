@@ -1,0 +1,23 @@
+---
+- name: Create Application Load Balancer
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - vars.yaml
+  tasks:
+    - elb_application_lb:
+        name: team2-lb
+        security_groups: "{{security_groups}}"
+        region: "{{region}}"
+        subnets: 
+          - "{{subnet1}}"
+          - "{{subnet2}}"
+          - "{{subnet3}}" 
+        listeners:
+        - Protocol: HTTP # Required. The protocol for connections from clients to the load balancer (HTTP or HTTPS) (case-sensitive).
+          Port: 80
+          DefaultActions:
+            - Type: forward # Required.
+              TargetGroupName: team2targetgroup
+        state: "{{state}}"
+        # tags: "{{tags}}"

@@ -1,0 +1,19 @@
+---
+- name: All TEAM2 ASG Playbooks
+  hosts: localhost
+  tasks: 
+  
+- name: Create Security Group
+  include: security_group.yaml
+
+- name: Create Launch Config
+  include: ec2_lc.yaml
+  
+- name: Create Target Group
+  include: target_group.yaml
+
+- name: Create Application Load Balancer
+  include: application_lb.yaml
+
+- name: Create Auto Scaling Group
+  include: asg.yaml
