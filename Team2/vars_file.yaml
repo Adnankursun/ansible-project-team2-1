@@ -7,7 +7,7 @@ region:                     "us-east-1"
 # volume_size:                "8"
 # volume_type:                "gp2"  
 # iops:                       "3000"
-key_name:                   "key_name"
+key_name:                    "key_name"
 # aws_default_image_size:     "8"
  #        TARGET_GROUP
 protocol:                   "http"
